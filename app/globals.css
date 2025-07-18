@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background:  #171717;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -22,5 +22,31 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:'Inter', sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #d1d5db, #6b7280, #374151);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
+}
+
+
+.gradient-subtitle {
+  background: linear-gradient(to right, #d1d5db, #5b85da,#274f90, #0c3981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
+}
+
+
+.button-hover {
+  background-color: #d1d5db; /* default background */
+  transition: background 0.3s ease;
+}
+
+.button-hover:hover {
+  background-image: linear-gradient(to right, #919396, #d2d7e1, #5e636c);
+  background-color: transparent; /* optional fallback */
 }

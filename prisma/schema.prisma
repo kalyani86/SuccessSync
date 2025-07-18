@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(uuid())
+  clearkUserId    String           @unique
+  email           String           @unique
+  name            String?
+  imageUrl        String?
+  industry        String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  bio             String?
+  experience      Int?
+  skills          String[]
+  assessments     Assessment?
+  coverLetter     CoverLetter?
+  resume          Resume?
+  industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
+}
+
+model IndustryInsight {
+  id                String        @id @default(uuid())
+  industry          String        @unique
+  SalaryRanges      Json[]
+  growthRate        Float
+  demandLevel       DemandLevel
+  topSkills         String[]
+  marketOutlook     MarketOutlook
+  keyTrends         String[]
+  recommendedSkills String[]
+  lastupdated       DateTime      @default(now())
+  nextupdate        DateTime
+  user              User[]
+}
+
+model Assessment {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  quizScore      Float
+  questions       Json[]
+  category       String
+  improvementTip String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
+}
+
+model Resume {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  content   String
+  atsScore  Float?
+  feedback  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model CoverLetter {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  content        String
+  jobDescription String?
+  companyName    String
+  jobTitle       String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
+}
+
+enum DemandLevel {
+  high
+  medium
+  low
+}
+
+enum MarketOutlook {
+  positive
+  negative
+  neutral
+}

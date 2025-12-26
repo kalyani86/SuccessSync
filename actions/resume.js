@@ -6,7 +6,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { revalidatePath } from "next/cache";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export async function saveResume(content) {
   const { userId } = await auth();
@@ -79,13 +79,12 @@ export async function improveWithAI({ current, type }) {
 
     Requirements:
     1. Use action verbs
-    2. Include metrics and results where possible
-    3. Highlight relevant technical skills
-    4. Keep it concise but detailed
-    5. Focus on achievements over responsibilities
-    6. Use industry-specific keywords
+    2. Highlight relevant technical skills
+    3. Keep it simple but detailed
+    4. Focus on achievements over responsibilities
+    5. Use industry-specific keywords
     
-    Format the response as a single paragraph without any additional text or explanations.
+    Format the response as a single paragraph for a work experiece without any additional text or explanations.
   `;
 
   try {

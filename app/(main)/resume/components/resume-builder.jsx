@@ -23,7 +23,6 @@ import useFetch from "@/app/hooks/use-fetch";
 import { useUser } from "@clerk/nextjs";
 import { entriesToMarkdown } from "@/app/lib/helper";
 import { resumeSchema } from "@/app/lib/schema";
-import html2pdf from "html2pdf.js/dist/html2pdf.min.js";
 import { Label } from "@/components/ui/label";
 
 export default function ResumeBuilder({ initialContent }) {
@@ -124,6 +123,7 @@ export default function ResumeBuilder({ initialContent }) {
       return;
     }
 
+    const html2pdf = (await import("html2pdf.js")).default;
       const opt = {
         margin: [15, 15],
         filename: "resume.pdf",
@@ -169,7 +169,7 @@ export default function ResumeBuilder({ initialContent }) {
           >
             {isSaving ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" />
                 Saving...
               </>
             ) : (
@@ -191,6 +191,10 @@ export default function ResumeBuilder({ initialContent }) {
                 Download PDF
               </>
             )}
+          </Button>
+            <Button 
+               className="button-hover">
+              Check ATS Score
           </Button>
         </div>
       </div>
